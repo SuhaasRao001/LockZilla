@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lockzilla - Password Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <style>
+        /* Keep your original CSS styles intact */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+            color: #333333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px; /* Reduced max width */
+            margin: 40px auto;
+            padding: 15px 20px; /* Reduced padding to decrease height */
+            background: #ffffff;
+            border-radius: 15px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px; /* Reduced margin */
+            position: relative;
+            z-index: 2;
+        }
+
+        header h1 {
+            font-size: 3rem; /* Slightly reduced font size */
+            color: #2c2c2c;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            margin: 0;
+            font-weight: bold;
+            position: relative;
+            animation: slideInUp 1s ease-out;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        header p {
+            margin: 15px 0;
+            font-size: 1.4rem;
+            color: #777777;
+        }
+
+        header .btn {
+            background: #4A90E2;
+            color: #ffffff;
+            padding: 10px 20px; /* Reduced padding */
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1rem; /* Reduced font size */
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 6px 20px rgba(72, 144, 226, 0.4);
+            display: inline-block;
+        }
+
+        header .btn:hover {
+            background: #0066cc;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+        }
+
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2.3rem; /* Reduced font size */
+            color: #333333;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            position: relative;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 180px;
+            height: 4px;
+            background: #4A90E2;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-bar input {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 50%;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar input:focus {
+            border-color: #4A90E2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #f9f9f9;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        table thead {
+            background: #4A90E2;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        table th, table td {
+            padding: 15px; /* Reduced padding */
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        table tbody tr:hover {
+            background: rgba(0, 102, 204, 0.1);
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        table .btn {
+            background: #4A90E2;
+            color: #ffffff;
+            padding: 8px 20px; /* Reduced padding */
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem; /* Slightly smaller font size */
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(72, 144, 226, 0.3);
+        }
+
+        table .btn:hover {
+            background: #0066cc;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 102, 204, 0.5);
+        }
+
+        a.btn {
+            display: inline-block;
+            margin: 30px 0; /* Reduced margin */
+            text-align: center;
+            background: #4A90E2;
+            color: #ffffff;
+            padding: 12px 25px; /* Reduced padding */
+            border-radius: 8px;
+            font-size: 1.1rem; /* Reduced font size */
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 8px 30px rgba(72, 144, 226, 0.4);
+            display: inline-block;
+        }
+
+        a.btn:hover {
+            background: #ff6ec7;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 110, 199, 0.5);
+        }
+
+        /* Specific style for Copy Button */
+        .copy-btn {
+            background: #4A90E2; /* Same color as other buttons */
+            color: #ffffff;
+            padding: 8px 20px; /* Same padding as other buttons */
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem; /* Same font size */
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(72, 144, 226, 0.3);
+        }
+
+        .copy-btn:hover {
+            background: #0066cc; /* Same hover color as other buttons */
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 102, 204, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.8rem;
+            }
+
+            table thead {
+                display: none;
+            }
+
+            table tbody tr {
+                display: block;
+                margin-bottom: 15px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                padding: 15px;
+            }
+
+            table tbody td {
+                display: block;
+                text-align: right;
+                font-size: 1rem;
+                padding: 15px 0;
+            }
+
+            table tbody td::before {
+                content: attr(data-label);
+                float: left;
+                font-weight: bold;
+                color: #4A90E2;
+                text-transform: uppercase;
+            }
+
+            a.btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+
+    <div class="container">
+        <header>
+            <h1>Lockzilla</h1>
+            <p>Welcome, {{ username }}!</p>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </header>
+
+        <h2>Your Saved Passwords</h2>
+
+        <!-- Search bar -->
+        <div class="search-bar">
+            <form method="GET" action="{{ url_for('index') }}">
+                <input type="text" name="search" value="{{ search_term }}" placeholder="Search by service..." />
+            </form>
+        </div>
+
+        <!-- Password table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Password</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for password in passwords %}
+                    <tr>
+                        <td>{{ password.service }}</td>
+                        <td>{{ password.password }} - Safe(No breaches)</td>
+                        <td>
+                            <!-- Copy Button -->
+                            <button class="copy-btn" onclick="copyPassword('{{ password.password }}')">Copy</button>
+                            <!-- Update Button -->
+                            <a href="{{ url_for('update_password', service=password.service) }}" class="btn">Update</a>
+                            <!-- Delete Button -->
+                            <form action="{{ url_for('delete_password', service=password.service) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn" style="background: #ff6ec7;">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">No passwords found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ url_for('add_password') }}" class="btn">Add New Password</a>
+    </div>
+
+    <!-- JavaScript to handle the copy functionality -->
+    <script>
+        function copyPassword(password) {
+            // Create a temporary input to hold the password
+            const tempInput = document.createElement('input');
+            tempInput.value = password;
+            document.body.appendChild(tempInput);
+
+            // Select and copy the text
+            tempInput.select();
+            document.execCommand('copy');
+
+            // Remove the temporary input
+            document.body.removeChild(tempInput);
+
+            // Alert the user that the password has been copied
+            alert('Password copied to clipboard!');
+        }
+    </script>
+</body>
+</html>

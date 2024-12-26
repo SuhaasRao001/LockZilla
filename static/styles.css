@@ -1,0 +1,131 @@
+/* styles.css */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(120deg, #2b2b2b, #121212);
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    background: linear-gradient(90deg, #ff00cc, #3333ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pulse 2s infinite;
+}
+
+header p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+table thead {
+    background: #3333ff;
+}
+
+table thead th {
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+    text-align: left;
+}
+
+table tbody tr {
+    background: #1a1a1a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.3s ease-in-out;
+}
+
+table tbody tr:hover {
+    background: rgba(255, 0, 204, 0.2);
+}
+
+table td {
+    padding: 10px;
+}
+
+table td a.btn, 
+table td form button {
+    display: inline-block;
+    background: linear-gradient(90deg, #ff00cc, #3333ff);
+    border: none;
+    padding: 8px 15px;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+table td a.btn:hover, 
+table td form button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 5px 15px rgba(255, 0, 204, 0.4);
+}
+
+a.btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #ff00cc, #3333ff);
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-top: 10px;
+}
+
+a.btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 0, 204, 0.4);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(1.5);
+    }
+}

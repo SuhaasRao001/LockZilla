@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Lockzilla</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 15px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            color: #222;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 0;
+            font-weight: bold;
+            position: relative;
+            animation: slideInUp 1s ease-out;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2.2rem;
+            color: #222;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        form label {
+            font-size: 1.1rem;
+            color: #444;
+            font-weight: 600;
+        }
+
+        form input {
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        form input:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+        }
+
+        form .btn {
+            background: #333;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        form .btn:hover {
+            background: #007BFF;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        a.btn {
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+            background: #333;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        a.btn:hover {
+            background: #007BFF;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            form {
+                gap: 15px;
+            }
+
+            form input, form .btn {
+                padding: 10px;
+            }
+        }
+    </style>
+    <div class="container">
+        <header>
+            <h1>Lockzilla</h1>
+        </header>
+        <h2>Login</h2>
+        <form method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit" name="login" class="btn">Login</button>
+        </form>
+
+        <a href="{{ url_for('register') }}" class="btn">Back to Register</a>
+    </div>
+</body>
+</html>
